@@ -3,24 +3,62 @@ algoritmo "CRUD"
 // Autor : Bruno Tolentino de Souza
 // Data : 2/6/2017
 var
-   rodar_programa, rodar: logico
-   comando,incpf,cpf,innome,nome,nasci,ender,bairro,estado,natural,fone,email: caractere
+   menu,programa,rodar: logico
+   comando: inteiro
+   u,s,usuario,uemail,senha,senha_teste,confirma,incpf,innome: caractere
+   cpf,nome,nasci,ender,bairro,estado,natural,fone,email: caractere
    
 inicio
    escreval("Bem vindo ao CRUD!")
-   
-   rodar_programa <- verdadeiro
-   enquanto rodar_programa = verdadeiro faca
+   menu <- verdadeiro
+   enquanto menu = verdadeiro faca
    escreval("Digite:")
-   escreval("- 'cadastrar' para cadastrar um novo cliente;")
-   escreval("- 'consultar' para consultar um cliente existente;")
-   escreval("- 'atualizar' para atualizar as informações de um cliente existente;")
-   escreval("- 'excluir' para excluir um cliente existente;")
-   escreval("- 'sair' para sair.")
+   escreval("- 1 para criar um usuário.")
+   escreval("- 2 para efetuar login.")
+   escreval("- Pressione ESC para sair.")
    escreva("Digite o comando desejado: ")
    leia(comando)
+   escolha(comando)
+   
+   caso 1
+   escreva("Digite seu nome de usuário: ")
+   leia(usuario)
+   escreva("Digite sua senha: ")
+   leia(senha)
+   escreval("Usuário cadastrado com sucesso.")
+   escreval(" ")
+   
+   caso 2
+   escreva("Usuário: ")
+   leia(u)
+   escreva("Senha: ")
+   leia(s)
+   se u+s = usuario+senha entao
+   escreval("Logado com sucesso.")
+   menu <- falso
+   senao
+   escreval("Usuário e/ou senha incorreto(s).")
+   fimse
+   
+   outrocaso
+   escreval("Essa opção não existe, tente novamente.")
+   
+   fimescolha
+   fimenquanto
+   
+   programa <- verdadeiro
+   enquanto programa = verdadeiro faca
+   escreval("Digite:")
+   escreval("- 1 para cadastrar um novo cliente;")
+   escreval("- 2 para consultar um cliente existente;")
+   escreval("- 3 para atualizar as informações de um cliente existente;")
+   escreval("- 4 para excluir um cliente existente;")
+   escreval("- 5 para sair.")
+   escreva("Digite o comando desejado: ")
+   leia(comando)
+   escolha(comando)
 
-   se comando = "cadastrar" entao
+   caso 1
    rodar <- verdadeiro
    enquanto rodar = verdadeiro faca
    escreva("Digite o CPF sem pontos e traços: ")
@@ -54,16 +92,15 @@ inicio
    escreval("E-mail: ", email)
    escreval(" ")
    escreva("Confirma? s/n: ")
-   leia(comando)
-   se comando = "s" entao
+   leia(confirma)
+   se confirma = "s" entao
    escreval("Cliente cadastrado com sucesso.")
    escreval(" ")
    rodar <- falso
    fimse
    fimenquanto
-   fimse
-   
-   se comando = "consultar" entao
+
+   caso 2
    rodar <- verdadeiro
    enquanto rodar = verdadeiro faca
    escreva("Digite o CPF sem pontos e traços: ")
@@ -84,15 +121,16 @@ inicio
    senao
    escreval("CPF não encontrado.")
    escreva("Tentar novamente? s/n: ")
-   leia(comando)
-   se comando = "n" entao
+   leia(confirma)
+   se confirma = "n" entao
    rodar <- falso
    fimse
    fimse
    fimenquanto
-   fimse
-   
-   se comando = "atualizar" entao
+
+   caso 3
+   rodar <- verdadeiro
+   enquanto rodar = verdadeiro faca
    escreva("Digite o nome: ")
    leia(innome)
    se innome = nome entao
@@ -114,14 +152,28 @@ inicio
    leia(fone)
    escreva("Digite o e-mail: ")
    leia(email)
-   escreva("Cliente atualizado com sucesso")
-   senao
-   escreval("Nome não encontrado.")
+   escreval("Favor confirmar o dados antes de salvá-los:")
    escreval(" ")
+   escreval("CPF: ", cpf)
+   escreval("Nome: ", nome)
+   escreval("Data de nascimento: ", nasci)
+   escreval("Naturalidade: ", natural)
+   escreval("Endereço: ", ender)
+   escreval("Bairro: ", bairro)
+   escreval("Estado: ", estado)
+   escreval("Telefone: ", fone)
+   escreval("E-mail: ", email)
+   escreval(" ")
+   escreva("Confirma? s/n: ")
+   leia(confirma)
+   se confirma = "s" entao
+   escreval("Cliente atualizado com sucesso.")
+   escreval(" ")
+   rodar <- falso
    fimse
-   fimse
-   
-   se comando = "excluir" entao
+   fimenquanto
+
+   caso 4
    escreva("Digite o CPF sem pontos e traços: ")
    leia(incpf)
    se incpf = cpf entao
@@ -134,15 +186,19 @@ inicio
    natural <- ""
    fone <- ""
    email <- ""
+   escreval("Cliente excluido com sucesso.")
    senao
    escreval("CPF não encontrado.")
    escreval(" ")
    fimse
-   fimse
-   
-   se comando = "sair" entao
-   rodar_programa <- falso
-   fimse
+
+   caso 5
+   programa <- falso
+
+   outrocaso
+   escreval("Essa opção não existe, tente novamente.")
+
+   fimescolha
    fimenquanto
    
 fimalgoritmo
